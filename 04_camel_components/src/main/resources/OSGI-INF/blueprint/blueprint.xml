@@ -43,23 +43,7 @@
         </dataFormats>
         <!-- Route Definition -->
         <route id="filexform">
-            <!-- Consume files from input directory -->
-            <!-- <from id="_from1" uri="file:{{fileInput}}?fileName=customers.csv&amp;noop=true"/> -->
-            <from id="_from1" uri="file:src/data/inbox?fileName=customers.csv&amp;noop=true"/>
-            <onException id="_onException1">
-                <exception>java.lang.IllegalArgumentException</exception>
-                <handled>
-                    <constant>true</constant>
-                </handled>
-                <!-- <to id="_to1" uri="file:{{fileError}}?fileName=csv-record-${date:now:yyyyMMdd}.txt"/> -->
-                <to id="_to1" uri="file:src/data/error?fileName=csv-record-${date:now:yyyyMMdd}.txt"/>
-            </onException>
-            <split id="_split1">
-                <tokenize token="\n"/>
-                <to id="_to2" ref="csv2json"/>
-                <!-- <to id="_to3" uri="file:{{fileOutput}}?fileName=account-${property.CamelSplitIndex}.json"/> -->
-                <to id="_to3" uri="file:src/data/outbox?fileName=account-${property.CamelSplitIndex}.json"/>
-            </split>
+            <!-- Consume files from input directory and the rest of the logic -->
         </route>
     </camelContext>
 </blueprint>
